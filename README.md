@@ -6,9 +6,8 @@ This repository contains the API code for the Shiftkey App, which is built using
 
 Before running the API, make sure you have the following installed:
 
-- Go (version X.X.X)
-- Gin (version X.X.X)
-- PostgreSQL (version X.X.X)
+- Go
+- PostgreSQL
 
 ## Getting Started
 
@@ -28,13 +27,25 @@ To get started with the Shiftkey App API, follow these steps:
 
 3. Set up the PostgreSQL database:
 
-   - Create a new database named `shiftkey`.
-   - Update the database connection details in the `config.yaml` file.
+   - Create a new database named `shiftkey-db`.
+   - Create a new `.env` file using the `.env.example` file as a template.
 
 4. Build and run the API:
 
    ```shell
-   go run main.go
+   go run cmd/main/main.go
+   ```
+
+   or build and run the API using `run.sh`:
+
+   ```shell
+   ./run.sh
+   ```
+
+   Make sure to give permission to the script before running it:
+
+   ```shell
+   chmod +x run.sh
    ```
 
 ## API Endpoints
@@ -42,8 +53,8 @@ To get started with the Shiftkey App API, follow these steps:
 The Shiftkey App API provides the following endpoints:
 
 - `/users`: Manage user data.
-- `/products`: Manage product data.
-- `/orders`: Manage order data.
+- `/events`: Manage events data.
+- `/attendance`: Manage user attendance in events data.
 
 For detailed information about each endpoint, refer to the API documentation.
 

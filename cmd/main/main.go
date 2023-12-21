@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -14,13 +15,22 @@ import (
 func main() {
 
 	db.Connect()
-	db.Migrate()
-	db.Seed(db.DB)
+
+	// Run these two if you're running the server for the first time or have to migrate the db
+	// db.Migrate()
+	// db.Seed(db.DB)
 
 	router := gin.Default()
 
+	router.GET("/ping", func(ctx *gin.Context) {
+		ctx.JSON(http.StatusOK, gin.H{
+			"message": "pong",
+		})
+	})
+
 	router.GET("/users", func(ctx *gin.Context) {
 		users, err := controller.GetAllUsers()
+		fmt.Print(users)
 		if err != nil {
 			ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
