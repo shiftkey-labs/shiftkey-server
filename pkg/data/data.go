@@ -1,6 +1,6 @@
 package data
 
-import "github.com/shiftkey-labs/shiftkey-api/pkg/model"
+import "github.com/shiftkey-labs/shiftkey-server/pkg/model"
 
 func GetLocalUsers() []model.User {
 	users := []model.User{

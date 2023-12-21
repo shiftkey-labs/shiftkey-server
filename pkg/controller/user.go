@@ -1,8 +1,8 @@
 package controller
 
 import (
-	"github.com/shiftkey-labs/shiftkey-api/pkg/db"
-	"github.com/shiftkey-labs/shiftkey-api/pkg/model"
+	"github.com/shiftkey-labs/shiftkey-server/pkg/db"
+	"github.com/shiftkey-labs/shiftkey-server/pkg/model"
 )
 
 func GetAllUsers() ([]model.User, error) {

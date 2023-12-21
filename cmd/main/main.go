@@ -8,8 +8,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"github.com/shiftkey-labs/shiftkey-api/pkg/controller"
-	"github.com/shiftkey-labs/shiftkey-api/pkg/db"
+	"github.com/shiftkey-labs/shiftkey-server/pkg/controller"
+	"github.com/shiftkey-labs/shiftkey-server/pkg/db"
 )
 
 func main() {

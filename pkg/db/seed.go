@@ -1,7 +1,7 @@
 package db
 
 import (
-	"github.com/shiftkey-labs/shiftkey-api/pkg/data"
+	"github.com/shiftkey-labs/shiftkey-server/pkg/data"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 )

@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"github.com/shiftkey-labs/shiftkey-api/pkg/model"
+	"github.com/shiftkey-labs/shiftkey-server/pkg/model"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

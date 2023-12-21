@@ -1,4 +1,4 @@
-# Shiftkey App API
+# Shiftkey App Server
 
 This repository contains the API code for the Shiftkey App, which is built using Go and Gin framework. The API interacts with a PostgreSQL database to store and retrieve data.
 

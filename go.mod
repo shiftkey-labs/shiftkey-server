@@ -1,4 +1,4 @@
-module github.com/shiftkey-labs/shiftkey-api
+module github.com/shiftkey-labs/shiftkey-server
 
 go 1.21.1
 
