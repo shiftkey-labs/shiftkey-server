@@ -6,9 +6,11 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
+	"github.com/shiftkey-labs/shiftkey-server/pkg/data"
 	"github.com/shiftkey-labs/shiftkey-server/pkg/model"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 var DB *gorm.DB
@@ -43,7 +45,68 @@ func Connect() {
 }
 
 func Migrate() {
-	err := DB.AutoMigrate(&model.User{})
+	// For Role Type
+	DB.Exec(`DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'role') THEN
+        CREATE TYPE Role AS ENUM ('student', 'volunteer', 'admin', 'god');
+    END IF;
+	END$$;`)
+
+	// For EventStatus Type
+	DB.Exec(`DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'eventstatus') THEN
+        CREATE TYPE EventStatus AS ENUM ('draft', 'published', 'finished');
+    END IF;
+	END$$;`)
+
+	err := DB.AutoMigrate(&model.User{}, &model.Host{}, &model.Event{})
+
+	for _, user := range data.GetLocalUsers() {
+		err := DB.Clauses(clause.OnConflict{
+			UpdateAll: true,
+		}).Create(&user).Error
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
+
+	for _, event := range data.GetLocalEvents() {
+		err := DB.Clauses(clause.OnConflict{
+			UpdateAll: true,
+		}).Create(&event).Error
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
+
+	for _, host := range data.GetLocalHosts() {
+		err := DB.Clauses(clause.OnConflict{
+			UpdateAll: true,
+		}).Create(&host).Error
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
+
+	DB.AutoMigrate(&model.EventHost{}, &model.Attendance{})
+
+	for _, attendance := range data.GetLocalAttendances() {
+		err := DB.Clauses(clause.OnConflict{
+			UpdateAll: true,
+		}).Create(&attendance).Error
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
+
+	for _, eventHost := range data.GetLocalEventHosts() {
+		err := DB.Clauses(clause.OnConflict{
+			UpdateAll: true,
+		}).Create(&eventHost).Error
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
 	if err != nil {
 		panic("failed to migrate database: " + err.Error())
 	}

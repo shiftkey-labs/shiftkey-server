@@ -1,4 +1,3 @@
 .env
 
-.DS_Store:
-    @find . -name .DS_Store -delete
+.DS_Store
